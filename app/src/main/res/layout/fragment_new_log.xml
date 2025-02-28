@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="newLogFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/publishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Publish"
+        android:layout_gravity="end"/>
+    <EditText
+        android:id="@+id/etDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Selecciona una fecha"
+        android:focusable="false" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Nivel de bienestar:"/>
+    <Spinner
+        android:id="@+id/anxietySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/postContentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Añade tus comentarios aquí"
+        android:textSize="24sp"
+        android:lines="10"
+        android:gravity="top|left">
+        <requestFocus />
+    </EditText>
+</LinearLayout>
+    </FrameLayout>
