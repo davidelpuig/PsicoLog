@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -47,6 +48,8 @@ public class newLogFragment extends Fragment {
 
     EditText etDate;
     Spinner spinnerAnxiety;
+    Spinner spinnerSleepTime;
+    Switch switchCiertoFalso;
 
     int year, month, day;
 
@@ -87,6 +90,7 @@ public class newLogFragment extends Fragment {
 
         // Referencia al Spinner
         spinnerAnxiety = view.findViewById(R.id.anxietySpinner);
+        spinnerSleepTime = view.findViewById(R.id.sleepTimeSpinner);
 
         // Lista de números del 1 al 5
         Integer[] numbers = {1, 2, 3, 4, 5};
@@ -99,7 +103,7 @@ public class newLogFragment extends Fragment {
         spinnerAnxiety.setAdapter(adapter);
 
         // Manejar la selección del Spinner
-        spinnerAnxiety.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinnerAnxiety.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int selectedNumber = (int) parent.getItemAtPosition(position);
@@ -110,7 +114,33 @@ public class newLogFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
                 // Acción opcional cuando no se selecciona nada
             }
-        });
+        });*/
+
+        // Lista de números del 1 al 5
+        Integer[] hours = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+
+        // Crear un adaptador para el Spinner
+        ArrayAdapter<Integer> adapter2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, hours);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Asignar el adaptador al Spinner
+        spinnerSleepTime.setAdapter(adapter2);
+
+        // Manejar la selección del Spinner
+        /*spinnerSleepTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //int selectedNumber = (int) parent.getItemAtPosition(position);
+                //Toast.makeText(getActivity(), "Seleccionaste: " + selectedNumber, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Acción opcional cuando no se selecciona nada
+            }
+        });*/
+
+        switchCiertoFalso = view.findViewById(R.id.sexSwitch);
     }
 
     private void publicar() {
@@ -145,6 +175,8 @@ public class newLogFragment extends Fragment {
         Map<String, Object> data = new HashMap<>();
         data.put("comments", content);
         data.put("wellness", Integer.parseInt(spinnerAnxiety.getSelectedItem().toString()));
+        data.put("sleep_time", Integer.parseInt(spinnerSleepTime.getSelectedItem().toString()));
+        data.put("sexual_activity", switchCiertoFalso.isChecked());
 
         String fechaFormateada = String.format("%04d%02d%02d", year, month+1, day);
 

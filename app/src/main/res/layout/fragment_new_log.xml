@@ -24,12 +24,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:layout_marginTop="10dp"
         android:text="Nivel de bienestar:"/>
     <Spinner
         android:id="@+id/anxietySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <EditText
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:text="Horas de sueño:"/>
+    <Spinner
+        android:id="@+id/sleepTimeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Switch
+        android:id="@+id/sexSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="24sp"
+        android:text="Actividad sexual"/>
+<EditText
         android:id="@+id/postContentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
