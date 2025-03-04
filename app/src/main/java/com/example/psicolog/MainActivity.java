@@ -1,6 +1,7 @@
 package com.example.psicolog;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
+    NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.signOutFragment)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
@@ -47,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
     }
 
     @Override
