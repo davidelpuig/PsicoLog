@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -34,8 +35,11 @@ public class statisticsFragment extends Fragment {
 
     Button refreshButton;
     EditText startDate, endDate;
-
+    TextView averageWelness, logCount;
+    View statistics, progressBar;
     Client client;
+
+    float  mediaBienestar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +58,24 @@ public class statisticsFragment extends Fragment {
         startDate = view.findViewById(R.id.etStartDate);
         endDate = view.findViewById(R.id.etEndDate);
         refreshButton = view.findViewById(R.id.refreshButton);
+        averageWelness = view.findViewById(R.id.averageTextView);
+        logCount = view.findViewById(R.id.logcountTextView);
+        statistics = view.findViewById(R.id.statistics);
+        progressBar = view.findViewById(R.id.progressBar);
 
         startDate.setOnClickListener(v -> showDatePickerDialog(startDate));
         endDate.setOnClickListener(v -> showDatePickerDialog(endDate));
+
+        Calendar today = Calendar.getInstance();
+        Calendar daysAgo = Calendar.getInstance();
+        daysAgo.add(Calendar.DAY_OF_MONTH, -30);
+
+        endDate.setText(today.get(Calendar.DAY_OF_MONTH)+"/"+(today.get(Calendar.MONTH)+1)+"/"+today.get(Calendar.YEAR));
+        startDate.setText(daysAgo.get(Calendar.DAY_OF_MONTH)+"/"+(daysAgo.get(Calendar.MONTH)+1)+"/"+daysAgo.get(Calendar.YEAR));
+
+        statistics.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +138,9 @@ public class statisticsFragment extends Fragment {
     {
         Databases databases = new Databases(client);
         Handler mainHandler = new Handler(Looper.getMainLooper());
+        progressBar.setVisibility(View.VISIBLE);
+        statistics.setVisibility(View.GONE);
+        refreshButton.setEnabled(false);
         try {
             databases.listDocuments(
                     getString(R.string.APPWRITE_DATABASE_ID), // databaseId
@@ -132,8 +154,24 @@ public class statisticsFragment extends Fragment {
                                     + error.toString(), Snackbar.LENGTH_LONG).show();
                             return;
                         }
+
                         System.out.println( result.toString() );
-                        //mainHandler.post(() -> adapter.establecerLista(result));
+
+                        mediaBienestar = 0.f;
+                        for(int i = 0; i < result.getDocuments().size(); i++)
+                        {
+                            mediaBienestar += (long)result.getDocuments().get(i).getData().get("wellness");
+                        }
+
+                        mediaBienestar /= result.getDocuments().size();
+
+                        mainHandler.post(() -> {
+                            averageWelness.setText(""+mediaBienestar);
+                            logCount.setText(""+result.getDocuments().size());
+                            progressBar.setVisibility(View.GONE);
+                            statistics.setVisibility(View.VISIBLE);
+                            refreshButton.setEnabled(true);
+                        });
                     })
             );
         } catch (AppwriteException e) {

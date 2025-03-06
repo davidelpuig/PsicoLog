@@ -39,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:visibility="gone"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -47,6 +48,20 @@
                     android:layout_marginTop="10dp"
                     android:text="Media diaria bienestar:"/>
                 <TextView
+                    android:id="@+id/averageTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:layout_marginTop="10dp"
+                    android:text="X"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:layout_marginTop="10dp"
+                    android:text="Número de registros en el periodo:"/>
+                <TextView
+                    android:id="@+id/logcountTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
@@ -55,9 +70,10 @@
             </LinearLayout>
             <ProgressBar
                 android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="visible"/>
         </FrameLayout>
     </LinearLayout>
 
