@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -72,7 +73,12 @@ public class statisticsFragment extends Fragment {
 
                 if(end.isAfter(start))
                 {
-                    consultarLogs(fields1[2]+fields1[1]+fields1[0], fields2[2]+fields2[1]+fields2[0]);
+                    // Definir el formato "AAAMMDD"
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+                    consultarLogs(
+                            start.format(formatter),
+                            end.format(formatter));
                 }
                 else
                 {
