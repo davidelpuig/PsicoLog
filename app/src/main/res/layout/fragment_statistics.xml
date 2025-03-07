@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -67,6 +67,19 @@
                     android:textSize="24sp"
                     android:layout_marginTop="10dp"
                     android:text="X"/>
+                <com.db.williamchart.view.BarChartView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <com.db.williamchart.view.DonutChartView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/donutChart"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:layout_gravity="center"/>
             </LinearLayout>
             <ProgressBar
                 android:id="@+id/progressBar"
