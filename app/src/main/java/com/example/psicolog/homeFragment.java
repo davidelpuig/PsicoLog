@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -127,6 +128,9 @@ public class homeFragment extends Fragment {
             holder.dateTextView.setText(fecha);
             holder.anxietyTextView.setText(post.get("wellness").toString());
             holder.contentTextView.setText(post.get("comments").toString());
+
+            int []colors = {R.color.wellness1, R.color.wellness2, R.color.wellness3, R.color.wellness4, R.color.wellness5};
+            holder.anxietyTextView.setBackgroundColor(ContextCompat.getColor(getContext(), colors[Integer.parseInt(post.get("wellness").toString()) - 1]));
         }
         @Override
         public int getItemCount() {
