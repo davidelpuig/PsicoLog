@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +42,7 @@ public class homeFragment extends Fragment {
 
     Client client;
     Account account;
+    AppViewModel appViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +58,7 @@ public class homeFragment extends Fragment {
         client = new Client(requireContext())
                 .setProject(getString(R.string.APPWRITE_PROJECT_ID));
         navController = Navigation.findNavController(view);
+        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
 
         view.findViewById(R.id.gotoNewPostFragmentButton).setOnClickListener(new View.OnClickListener() {
              @Override
@@ -131,6 +135,14 @@ public class homeFragment extends Fragment {
 
             int []colors = {R.color.wellness1, R.color.wellness2, R.color.wellness3, R.color.wellness4, R.color.wellness5};
             holder.anxietyTextView.setBackgroundColor(ContextCompat.getColor(getContext(), colors[Integer.parseInt(post.get("wellness").toString()) - 1]));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    appViewModel.currentLog.postValue(post);
+                    navController.navigate(R.id.viewLogFragment);
+                }
+            });
         }
         @Override
         public int getItemCount() {
