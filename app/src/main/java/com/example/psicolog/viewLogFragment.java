@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -36,6 +37,7 @@ public class viewLogFragment extends Fragment {
     TextView sleepTime;
     TextView sex;
     TextView logContent;
+    Toolbar toolbar;
     Button delete;
 
     AppViewModel viewModel;
@@ -57,12 +59,16 @@ public class viewLogFragment extends Fragment {
         client = new Client(requireContext())
                 .setProject(getString(R.string.APPWRITE_PROJECT_ID)); // Your project ID
 
+        toolbar = view.getRootView().findViewById(R.id.toolbar);
         date = view.findViewById(R.id.dateTextView);
         wellness = view.findViewById(R.id.wellnessTextView);
         sleepTime = view.findViewById(R.id.sleepTimeTextView);
         sex = view.findViewById(R.id.sexTextView);
         logContent = view.findViewById(R.id.logContentTextView);
         delete = view.findViewById(R.id.deleteButton);
+
+        toolbar = view.getRootView().findViewById(R.id.toolbar);
+        toolbar.setTitle("Log diario");
 
         viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
 
@@ -75,12 +81,12 @@ public class viewLogFragment extends Fragment {
                 Calendar day = Calendar.getInstance();
                 day.set(Integer.parseInt(dateStr.substring(0,4)), Integer.parseInt(dateStr.substring(4,6)), Integer.parseInt(dateStr.substring(6,8)));
 
-                String[] dias_semana={ "Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles" };
-                String[] meses={ "Diciembre", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre"};
+                String[] dias_semana = getResources().getStringArray(R.array.dias_semana);
+                String[] meses = getResources().getStringArray(R.array.meses);
                 date.setText(dias_semana[day.get(Calendar.DAY_OF_WEEK)-1]+", "+day.get(Calendar.DAY_OF_MONTH)+" de "+meses[day.get(Calendar.MONTH)]+" de "+day.get(Calendar.YEAR));
                 wellness.setText("Nivel de bienestar: "+stringObjectMap.get("wellness").toString());
-                int []colors = {R.color.wellness1, R.color.wellness2, R.color.wellness3, R.color.wellness4, R.color.wellness5};
-                wellness.setBackgroundColor(ContextCompat.getColor(getContext(), colors[Integer.parseInt(stringObjectMap.get("wellness").toString()) - 1]));
+                int []colors = getResources().getIntArray(R.array.wellness_colors);
+                wellness.setBackgroundColor(colors[Integer.parseInt(stringObjectMap.get("wellness").toString()) - 1]);
                 if(stringObjectMap.get("sleep_time") != null)
                     sleepTime.setText("Horas de sueño: "+stringObjectMap.get("sleep_time").toString());
                 else

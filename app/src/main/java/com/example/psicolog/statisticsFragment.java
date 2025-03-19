@@ -1,23 +1,21 @@
 package com.example.psicolog;
 
 import android.app.DatePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.db.williamchart.view.BarChartView;
@@ -46,6 +44,7 @@ public class statisticsFragment extends Fragment {
     Button refreshButton;
     EditText startDate, endDate;
     TextView averageWelness, logCount;
+    Toolbar toolbar;
     View statistics, progressBar;
 
     LineChartView linChart;
@@ -69,6 +68,7 @@ public class statisticsFragment extends Fragment {
         client = new Client(requireContext())
                 .setProject(getString(R.string.APPWRITE_PROJECT_ID));
 
+        toolbar = view.getRootView().findViewById(R.id.toolbar);
         startDate = view.findViewById(R.id.etStartDate);
         endDate = view.findViewById(R.id.etEndDate);
         refreshButton = view.findViewById(R.id.refreshButton);
@@ -92,6 +92,9 @@ public class statisticsFragment extends Fragment {
 
         statistics.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
+
+        toolbar = view.getRootView().findViewById(R.id.toolbar);
+        toolbar.setTitle("Estadísticas");
 
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -161,13 +164,15 @@ public class statisticsFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         statistics.setVisibility(View.GONE);
         refreshButton.setEnabled(false);
+        int [] wellnessColors = getResources().getIntArray(R.array.wellness_colors);
+
         Integer[] barColors = {
                 ContextCompat.getColor(getContext(), R.color.black),
-                ContextCompat.getColor(getContext(), R.color.wellness1),
-                ContextCompat.getColor(getContext(), R.color.wellness2),
-                ContextCompat.getColor(getContext(), R.color.wellness3),
-                ContextCompat.getColor(getContext(), R.color.wellness4),
-                ContextCompat.getColor(getContext(), R.color.wellness5)
+                wellnessColors[0],
+                wellnessColors[1],
+                wellnessColors[2],
+                wellnessColors[3],
+                wellnessColors[4]
         };
         int[] sumValues = new int[5];
         try {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
@@ -44,6 +45,8 @@ public class homeFragment extends Fragment {
     Account account;
     AppViewModel appViewModel;
 
+    Toolbar toolbar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +69,9 @@ public class homeFragment extends Fragment {
                  navController.navigate(R.id.newLogFragment);
              }
          });
+
+        toolbar = view.getRootView().findViewById(R.id.toolbar);
+        toolbar.setTitle("Últimos logs");
 
         RecyclerView postsRecyclerView = view.findViewById(R.id.postsRecyclerView);
 
@@ -133,8 +139,10 @@ public class homeFragment extends Fragment {
             holder.anxietyTextView.setText(post.get("wellness").toString());
             holder.contentTextView.setText(post.get("comments").toString());
 
-            int []colors = {R.color.wellness1, R.color.wellness2, R.color.wellness3, R.color.wellness4, R.color.wellness5};
-            holder.anxietyTextView.setBackgroundColor(ContextCompat.getColor(getContext(), colors[Integer.parseInt(post.get("wellness").toString()) - 1]));
+            //int []colors = {R.color.wellness1, R.color.wellness2, R.color.wellness3, R.color.wellness4, R.color.wellness5};
+            int [] colors = getResources().getIntArray(R.array.wellness_colors);
+
+            holder.anxietyTextView.setBackgroundColor(colors[Integer.parseInt(post.get("wellness").toString()) - 1]);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
