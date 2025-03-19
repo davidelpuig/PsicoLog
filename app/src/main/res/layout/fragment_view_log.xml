@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="DD/MM/AAAA"/>
+            android:text="SSSS, DD de MM de AAAA"/>
         <TextView
             android:id="@+id/wellnessTextView"
             android:layout_width="match_parent"
@@ -37,11 +37,19 @@
             android:textSize="24sp"
             android:layout_marginTop="10dp"
             android:text="Actividad sexual: No"/>
-        <EditText
+        <TextView
             android:id="@+id/logContentTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum">
-        </EditText>
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
+        </TextView>
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Borrar"
+            android:layout_gravity="end"/>
     </LinearLayout>
 </FrameLayout>
