@@ -69,12 +69,22 @@
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
                     android:text="X"/>
-                <com.db.williamchart.view.BarChartView
+                <com.db.williamchart.view.LineChartView
+                    android:id="@+id/linearChart"
+                    android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_height="200dp"
+                    android:visibility="gone"/>
+                <com.db.williamchart.view.BarChartView
                     android:id="@+id/barChart"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp" />
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:chart_barsRadius="4dp"
+                    app:chart_spacing="2dp" />
+
                 <com.db.williamchart.view.DonutChartView
                     android:layout_marginTop="10dp"
                     android:id="@+id/donutChart"

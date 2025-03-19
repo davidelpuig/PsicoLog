@@ -17,10 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.db.williamchart.view.BarChartView;
 import com.db.williamchart.view.DonutChartView;
+import com.db.williamchart.view.LineChartView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.time.LocalDate;
@@ -46,6 +48,7 @@ public class statisticsFragment extends Fragment {
     TextView averageWelness, logCount;
     View statistics, progressBar;
 
+    LineChartView linChart;
     BarChartView barChart;
     DonutChartView donutChartView;
     Client client;
@@ -73,6 +76,7 @@ public class statisticsFragment extends Fragment {
         logCount = view.findViewById(R.id.logcountTextView);
         statistics = view.findViewById(R.id.statistics);
         progressBar = view.findViewById(R.id.progressBar);
+        linChart = view.findViewById(R.id.linearChart);
         barChart = view.findViewById(R.id.barChart);
         donutChartView = view.findViewById(R.id.donutChart);
 
