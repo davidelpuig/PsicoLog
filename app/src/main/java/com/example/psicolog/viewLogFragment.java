@@ -91,8 +91,8 @@ public class viewLogFragment extends Fragment {
                     sleepTime.setText("Horas de sueño: "+stringObjectMap.get("sleep_time").toString());
                 else
                     sleepTime.setText("Horas de sueño: ?");
-                if(stringObjectMap.get("sexual_Activity") != null)
-                    sex.setText("Actividad sexual: "+stringObjectMap.get("sexual_activity").toString());
+                if(stringObjectMap.get("sexual_activity") != null)
+                    sex.setText("Actividad sexual: "+(stringObjectMap.get("sexual_activity").equals(true) ? "Sí" : "No"));
                 else
                     sex.setText("Actividad sexual: ?");
                 logContent.setText(stringObjectMap.get("comments").toString());
