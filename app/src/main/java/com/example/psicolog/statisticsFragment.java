@@ -198,7 +198,7 @@ public class statisticsFragment extends Fragment {
                         for(int i = 0; i < result.getDocuments().size(); i++)
                         {
                             long wellness = (long) result.getDocuments().get(i).getData().get("wellness");
-                            data.put(result.getDocuments().get(i).getId().substring(6,8), (float)wellness);
+                            data.put(""+i/*result.getDocuments().get(i).getId()*/, (float)wellness);
                             colors.add(barColors[(int)wellness]);
                             mediaBienestar += (float)wellness;
                             sumValues[(int)(wellness - 1)]++;
